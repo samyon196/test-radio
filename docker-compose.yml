@@ -1,38 +1,39 @@
-version: '3'
+version: '2'
 services:  
 
     rad1:
         image: emane20
         tty: true
         privileged: true
+        command: emane -r -l 0 test-radio/platform1.xml
         networks:
+            - app1
             - ota-net
-            - app-bus-1
+
     app1:
         image: emane20
         tty: true
         privileged: true
         networks:
-            - app-bus-1
+            - app1
+
     rad2:
         image: emane20
         tty: true
         privileged: true
+        command: emane -r -l 0 test-radio/platform2.xml
         networks:
+            - app2
             - ota-net
-            - app-bus-2
+
     app2:
         image: emane20
         tty: true
         privileged: true
         networks:
-            - app-bus-2
+            - app2
+
 networks:
-    null-br:
-      driver: bridge
     ota-net:
-      driver: bridge
-    app-bus-1:
-      driver: bridge
-    app-bus-2:
-      driver: bridge
+    app1:
+    app2:
