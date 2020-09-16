@@ -1,0 +1,38 @@
+version: '3'
+services:  
+
+    rad1:
+        image: emane20
+        tty: true
+        privileged: true
+        networks:
+            - ota-net
+            - app-bus-1
+    app1:
+        image: emane20
+        tty: true
+        privileged: true
+        networks:
+            - app-bus-1
+    rad2:
+        image: emane20
+        tty: true
+        privileged: true
+        networks:
+            - ota-net
+            - app-bus-2
+    app2:
+        image: emane20
+        tty: true
+        privileged: true
+        networks:
+            - app-bus-2
+networks:
+    null-br:
+      driver: bridge
+    ota-net:
+      driver: bridge
+    app-bus-1:
+      driver: bridge
+    app-bus-2:
+      driver: bridge
